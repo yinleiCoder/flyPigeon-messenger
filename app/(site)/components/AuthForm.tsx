@@ -4,9 +4,12 @@ import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-hot-toast";
+import { signIn, signOut } from "next-auth/react";
 import Input from "@/app/components/inputs/input";
 import Button from "@/app/components/Button";
 import AuthSocialButton from "./AuthSocialButton";
+import request from "@/app/libs/request";
 
 type Variant = "LOGIN" | "REGISTER";
 
@@ -37,17 +40,44 @@ function AuthForm() {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
     if (variant === "REGISTER") {
-      // axios register
+      request
+        .post("/api/register", data)
+        .then(() => {
+          toast.success("欢迎宝子加入大家庭！");
+        })
+        .catch(() => toast.error("出错啦"))
+        .finally(() => setIsLoading(false));
     }
 
     if (variant === "LOGIN") {
-      // nextauth sign in
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+      })
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error("宝子，请重新检查下您的账户密码");
+          }
+          if (callback?.ok && !callback?.error) {
+            toast.success("欢迎宝子回家！");
+          }
+        })
+        .finally(() => setIsLoading(false));
     }
   };
 
   const socialAction = (action: string) => {
     setIsLoading(true);
-    // nextauth social sign in
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error("宝子，第三方认证登录出错啦，请重试");
+        }
+        if (callback?.ok && !callback?.error) {
+          toast.success("欢迎宝子回家！");
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (

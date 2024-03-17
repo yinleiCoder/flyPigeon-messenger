@@ -11,9 +11,9 @@
 - [TailwindCSS Forms](https://github.com/tailwindlabs/tailwindcss-forms)
 - [Prisma](https://www.prisma.io/docs/getting-started)
 - [MongoDB](https://cloud.mongodb.com/v2/65f67cfe3771456da73cec01#/clusters)
-- []()
-- []()
-- []()
+- [Next Auth](https://next-auth.js.org/v3/adapters/prisma)
+- [Axios](https://axios-http.com/)
+- [React Hot Toast](https://react-hot-toast.com/)
 - []()
 - []()
 
