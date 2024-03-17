@@ -9,6 +9,11 @@
 - [Clsx](https://github.com/lukeed/clsx)
 - [Rect Hook Form](https://react-hook-form.com/)
 - [TailwindCSS Forms](https://github.com/tailwindlabs/tailwindcss-forms)
+- [Prisma](https://www.prisma.io/docs/getting-started)
+- [MongoDB](https://cloud.mongodb.com/v2/65f67cfe3771456da73cec01#/clusters)
+- []()
+- []()
+- []()
 - []()
 - []()
 
