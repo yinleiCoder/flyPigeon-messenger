@@ -1,21 +1,30 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-hot-toast";
-import { signIn, signOut } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Input from "@/app/components/inputs/input";
 import Button from "@/app/components/Button";
 import AuthSocialButton from "./AuthSocialButton";
 import request from "@/app/libs/request";
+import { useRouter } from "next/navigation";
 
 type Variant = "LOGIN" | "REGISTER";
 
 function AuthForm() {
   const [variant, setVariant] = useState<Variant>("LOGIN");
   const [isLoading, setIsLoading] = useState(false);
+  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      router.replace("/users");
+    }
+  }, [session?.status, router]);
 
   const toggleVariant = useCallback(() => {
     if (variant === "LOGIN") {
@@ -43,7 +52,8 @@ function AuthForm() {
       request
         .post("/api/register", data)
         .then(() => {
-          toast.success("欢迎宝子加入大家庭！");
+          toast.success("宝子，您的专属账号记好咯");
+          signIn('credentials', data)
         })
         .catch(() => toast.error("出错啦"))
         .finally(() => setIsLoading(false));
@@ -60,6 +70,7 @@ function AuthForm() {
           }
           if (callback?.ok && !callback?.error) {
             toast.success("欢迎宝子回家！");
+            router.replace("/users");
           }
         })
         .finally(() => setIsLoading(false));
@@ -75,6 +86,7 @@ function AuthForm() {
         }
         if (callback?.ok && !callback?.error) {
           toast.success("欢迎宝子回家！");
+          router.replace("/users");
         }
       })
       .finally(() => setIsLoading(false));
