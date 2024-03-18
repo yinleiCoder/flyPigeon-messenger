@@ -10,7 +10,7 @@ interface AvatarProps {
 function Avatar({ user }: AvatarProps) {
   return (
     <div className="relative">
-      <div className="relative inline-block rounded-full overflow-hidden h-8 w-8 md:h-8 md:w-8 border border-black">
+      <div className="relative inline-block rounded-full overflow-hidden h-8 w-8 md:h-8 md:w-8">
         <Image
           alt={user?.name ?? ""}
           src={user?.image || "/images/userDefaultAvatar.png"}

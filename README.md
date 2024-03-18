@@ -17,7 +17,9 @@
 - [Date Fns](https://date-fns.org/)
 - [Next Cloudinary](https://next.cloudinary.dev/installation)
 - [Headlessui React](https://headlessui.com/)
-- []()
+- [React Select](https://react-select.com/)
+- [React Spinners](https://github.com/davidhu2000/react-spinners)
+- [Pusher Realtime](https://pusher.com/)
 
 ## 参考文档
 
