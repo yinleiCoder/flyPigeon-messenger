@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import prisma from '@/app/libs/prisma_db'
+import { pusherServer } from '@/app/libs/pusher';
 
 interface IParams {
     conversationId?: string;
@@ -13,7 +14,7 @@ export async function DELETE(request: Request, { params }: { params: IParams }) 
         if (!currentUser?.id) {
             return new NextResponse('q请登录', { status: 401 })
         }
-        
+
         const existingConversation = await prisma.conversation.findUnique({
             where: {
                 id: conversationId
@@ -25,7 +26,7 @@ export async function DELETE(request: Request, { params }: { params: IParams }) 
         if (!existingConversation) {
             return new NextResponse('无效的对话', { status: 400 })
         }
-        
+
         const deletedConversation = await prisma.conversation.deleteMany({
             where: {
                 id: conversationId,
@@ -34,6 +35,13 @@ export async function DELETE(request: Request, { params }: { params: IParams }) 
                 }
             }
         })
+
+        existingConversation.users.forEach(user => {
+            if (user.email) {
+                pusherServer.trigger(user.email, 'conversation:remove', existingConversation)
+            }
+        })
+
         return NextResponse.json(deletedConversation)
     } catch (error: any) {
         console.log(error, "ERROR_CONVERSATION_DELETE")

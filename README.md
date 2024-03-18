@@ -20,6 +20,7 @@
 - [React Select](https://react-select.com/)
 - [React Spinners](https://github.com/davidhu2000/react-spinners)
 - [Pusher Realtime](https://pusher.com/)
+- [Lodash](https://lodash.com/)
 
 ## 参考文档
 
