@@ -15,6 +15,7 @@
 - [Axios](https://axios-http.com/)
 - [React Hot Toast](https://react-hot-toast.com/)
 - [Date Fns](https://date-fns.org/)
+- [Next Cloudinary](https://next.cloudinary.dev/installation)
 - []()
 
 ## 参考文档
