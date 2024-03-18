@@ -6,7 +6,7 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-hot-toast";
 import { signIn, useSession } from "next-auth/react";
-import Input from "@/app/components/inputs/input";
+import Input from "@/app/components/inputs/Input";
 import Button from "@/app/components/Button";
 import AuthSocialButton from "./AuthSocialButton";
 import request from "@/app/libs/request";
