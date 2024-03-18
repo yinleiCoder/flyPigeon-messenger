@@ -14,7 +14,7 @@ export async function POST(
             name// 群聊名
         } = await request.json()
         if (!currentUser?.id || !currentUser?.email) {
-            return new NextResponse("请先登录", { status: 401 })
+            return new NextResponse("请登录", { status: 401 })
         }
 
         if (isGroup && (!members || members.length < 2 || !name)) {

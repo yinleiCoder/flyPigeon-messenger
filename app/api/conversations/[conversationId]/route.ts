@@ -11,7 +11,7 @@ export async function DELETE(request: Request, { params }: { params: IParams }) 
         const { conversationId } = params;
         const currentUser = await getCurrentUser()
         if (!currentUser?.id) {
-            return new NextResponse('请先登录', { status: 401 })
+            return new NextResponse('q请登录', { status: 401 })
         }
         
         const existingConversation = await prisma.conversation.findUnique({

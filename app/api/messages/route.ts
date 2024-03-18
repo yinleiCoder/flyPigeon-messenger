@@ -12,7 +12,7 @@ export async function POST(request: Request) {
         } = await request.json()
 
         if (!currentUser?.id || !currentUser?.email) {
-            return new NextResponse('请先登录', { status: 500 })
+            return new NextResponse('请登录', { status: 500 })
         }
 
         const newMessage = await prisma.message.create({

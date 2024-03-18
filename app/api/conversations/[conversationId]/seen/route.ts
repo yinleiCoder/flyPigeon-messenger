@@ -14,7 +14,7 @@ export async function POST(request: Request, {
         const { conversationId } = params
 
         if (!currentUser?.id || !currentUser?.email) {
-            return new NextResponse('请先登录', { status: 401 })
+            return new NextResponse('请登录', { status: 401 })
         }
 
         const conversation = await prisma.conversation.findUnique({
